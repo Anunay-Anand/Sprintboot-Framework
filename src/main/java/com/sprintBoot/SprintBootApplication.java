@@ -1,5 +1,6 @@
 package com.sprintBoot;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,12 @@ public class SprintBootApplication implements CommandLineRunner {
 	DB db;
 
 	public static void main(String[] args) {
+		// Configuration of dotenv
+		Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+		dotenv.entries().forEach((entry) -> System.setProperty(
+				entry.getKey(), entry.getValue()
+		));
+
 		SpringApplication.run(SprintBootApplication.class, args);
 	}
 
